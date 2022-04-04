@@ -3,7 +3,7 @@
 # pour les fichiers uniquement la comme info
 info*
 
-main.c
+# main.c
 
 *.swp
 

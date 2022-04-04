@@ -6,7 +6,7 @@
 /*   By: vhaefeli <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:25:37 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/03/16 16:10:10 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:15:52 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int main (void)
     win_ptr = mlx_new_window(mlx_ptr, 610, 610, "Le beau carre");
 	while(j++ < 560)
 	{
+		if (j%2 == 0)
+			color += 0x10000;
+
 		while(i++ < 562)
 		{
 			mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
@@ -37,8 +40,6 @@ int main (void)
 				color += 0x010101;
 		}
 		i = 50;
-		if (j%2 == 0)
-			color -= 0x10000;
 	}
    mlx_loop(mlx_ptr);
 }
