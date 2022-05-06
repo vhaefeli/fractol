@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhaefeli <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:21:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/04/26 16:16:38 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:00:52 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	fractal_mandelbrot(t_varmlx	*w)
+void	fractal_mandelbrot(t_varmlx	*v)
 {
 	t_complex	z;
 	t_complex	c;
 	t_complex	temp;
 	int			i;
 
-	z = screen_to_complex(x, y, v);
-	c = screen_to_complex(x, y, v);
+	z.r = 0;
+	z.i = 0;
+	c.i = (v->pxlpos->x - v->cx) * v->scale;
+	c.r = (- v->pxlpos-> + c->cy) * v->scale;
 	i = 0;
-	while (z.r * z.r + z.i * z.i < (1 << 8) && i < v->max)
+	while (z.r * z.r + z.i * z.i < 4 && i++ < v->itmax)
 	{
 		temp.r = z.r * z.r - z.i * z.i + c.r;
 		temp.i = z.r * z.i * 2 + c.i;
@@ -31,9 +33,9 @@ void	fractal_mandelbrot(t_varmlx	*w)
 		}
 		z.r = temp.r;
 		z.i = temp.i;
-		i++;
 	}
-	return ((t_pixel){.c = z, .i = i});
+	ft_shade_color(v, i);
+	put_pixel(v);
 }
 
 void	fractal_julia(t_var *v)

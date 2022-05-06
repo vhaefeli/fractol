@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhaefeli <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:22:47 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/04/26 12:25:08 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:01:36 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static int error(int type)
 	return (1);
 }
 
-static int	check(char **argv, int *fractal)
+static int	check(char **argv, t_varmlx *v)
 {
 	char *str;
 
 	str = ft_strtolower(argv[1]);
 	if (ft_strcmp(str, "mandelbrot") == 0)
-		*fractal = 1;
+		v->fractal = 1;
 	else if (ft_strcmp(str, "julia") == 0)
-		*fractal = 2;
+		v->fractal = 2;
 	else if (ft_strcmp(str, "burningship") == 0)
-		*fractal = 3;
+		v->fractal = 3;
 	else if (ft_strcmp(str, "feather") == 0)
-		*fractal = 4;
+		v->fractal = 4;
 	else
 		return (1);
 	return (0);
@@ -59,40 +59,45 @@ static void		assign(t_varmlx *v)
 	v->tpos->y = 8;
 	v->pxlpos->x = 0;
 	v->pxlpos->y = 0;
-	v->mouse->x = 0.285;
-	v->mouse->y = 0.013;
-	v->zoom = 1;
+	v->mi = 0.285;
+	v->mr = 0.013;
+	v->scale = 3 / IMG_W;
+	if (v->fractal == 1)
+		v->ci = IMG_W / 3 * 2;
+	else
+		v->ci = IMG_W / 2;
+	v->cr = IMG_H / 2;
+	v->i = 0;
+	v->mouseonoff = 0;
 }
 
-static void		init_win(t_varmlx *v, int fractal)
+static void		init_win(t_varmlx *v)
 {
 	assign(v, w);
-	w->mlx = mlx_init();
-	w->win = mlx_new_window(w->mlx, -1, -1, WIN_W, WIN_H, "Fract-ol");
-	mlx_expose_hook(w->win, expose_hook, v, fractal);
-	mlx_hook(w->win, 6, 64, motion_hook, v);
-	mlx_hook(w->win, 17, 0, close_hook, v);
-	mlx_hook(w->win, 2, 0, key_hook, v);
-	mlx_mouse_hook(w->win, mouse_hook, v);
-	mlx_do_key_autorepeaton(w->mlx);
-	mlx_loop(w->mlx);
+	v->mlx = mlx_init();
+	v->win = mlx_new_window(v->mlx, -1, -1, WIN_W, WIN_H, "Fract-ol");
+	mlx_expose_hook(v->win, expose_hook, v);
+	mlx_hook(v->win, 6, 64, motion_hook, v);
+	mlx_hook(v->win, 17, 0, close_hook, v);
+	mlx_hook(v->win, 2, 0, key_hook, v);
+	mlx_mouse_hook(v->win, mouse_hook, v);
+	mlx_do_key_autorepeaton(v->mlx);
+	mlx_loop(v->mlx);
 	exit(0);
 }
 
 int	main (int argc, char **argv)
 {
 	t_varmlx	*v;
-	int		*fractal;
 	
-//	fractal = 0;
-	w = (t_varmlx *)malloc(sizeof(t_varmlx));
+	v = (t_varmlx *)malloc(sizeof(t_varmlx));
 	if (argc < 2)
 		return (error(0));
 	else if (argc > 2)
 		return (error(3));
-	else if (check(argv, fractal) > 0)
+	else if (check(argv, v) > 0)
 		return (error(2));
 	else
-		init_win(v, fractal);
+		init_win(v);
 	return (0);
 }

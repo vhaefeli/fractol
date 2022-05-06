@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhaefeli <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 08:50:29 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/04/26 10:53:42 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:01:43 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 
 # define MID_W IMG_W / 2
 # define MID_H IMG_H / 2
-
 
 
 

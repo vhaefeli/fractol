@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:21:41 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/04 13:28:24 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:01:26 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,23 @@ int		put_pixel(t_varmlx *w, int type)
 	return (0);
 }
 
-void	draw_fractal(t_var *v)
+void	draw_fractal(t_var *v, int fractal, t_irgraph *g)
 {
-	v->y = -1;
-	v->nam = ft_strjoin("Fractal : ", ft_firstupper(v->ftl[v->num - 1]));
-	v->len = WIN_W - 50 - ft_strlen(v->nam) * 10;
-	rotate_fractal(v, v->rot);
-	while (++v->y < WIN_H && (v->x = -1) == -1)
+		while (++v->y < WIN_H && (v->x = -1) == -1)
 	{
 		while (++v->x < WIN_W)
 		{
-			if (v->num == 1)
-				fractal_julia(v);
-			else if (v->num == 2)
-				fractal_mandelbrot(v);
-			else if (v->num == 3)
-				fractal_mandelbrot(v);
+			if (fractal  == 1)
+				fractal_mandelbrot(v, g);
+			else if (fractal == 2)
+				fractal_julia(v, g);
+			else if (fractal == 3)
+				fractal_burningship(v, g);
+			else if (fractal == 4)
+				fractal_feather(v, g);
 		}
 	}
+	g->i = 0;
 }
 
 char    *fractal_name(int fractal)
@@ -66,20 +65,15 @@ char    *fractal_name(int fractal)
 
 void	user_interface_texts(t_varmlx *v, int fractal, int iteration)
 {
-    int     i;
-    int     j;
-    char    **text_interface;
-
-    text_interface = ft_interfacetext(v, fractal, iteration);
-	mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y, v->tcolor, "Fractal:");
-	mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y + 20, v->tcolor, fractal_name(fractal));
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y + 40, v->tcolor, "Mouse position/focus point:");
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y + 60, v->tcolor, "Real:");
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y, v->tcolor, ft_itoa(v->mouse->x));
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y, v->tcolor, "Imaginary:");
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y, v->tcolor, ft_itoa(v->mouse->y));
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y, v->tcolor, "Iteration:");
-    mlx_string_put(v->mlx, v->win, v->tpos->x, v->tpos->y, v->tcolor, ft_itoa(iteration));
+	mlx_string_put(v->mlx, v->win, 1128, 8, v->tcolor, "Fractal:");
+	mlx_string_put(v->mlx, v->win, 1128, 28, v->tcolor, fractal_name(fractal));
+    mlx_string_put(v->mlx, v->win, 1128, 48, v->tcolor, "Mouse position/focus point:");
+    mlx_string_put(v->mlx, v->win, 1128, 68, v->tcolor, "Real:");
+    mlx_string_put(v->mlx, v->win, 1128, 88, v->tcolor, ft_itoa(v->mouse->x));
+    mlx_string_put(v->mlx, v->win, 1128, 108, v->tcolor, "Imaginary:");
+    mlx_string_put(v->mlx, v->win, 1128, 128, v->tcolor, ft_itoa(v->mouse->y));
+    mlx_string_put(v->mlx, v->win, 1128, 148, v->tcolor, "Iteration:");
+    mlx_string_put(v->mlx, v->win, 1128, 168, v->tcolor, ft_itoa(iteration));
 }
 
 void	mlx_draw(t_var *v, int x, int y, int clr)
