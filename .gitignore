@@ -5,6 +5,8 @@ info*
 
 # main.c
 
+.vscode
+
 *.swp
 
 a.out

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:59:19 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/06 16:58:30 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:04:10 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ typedef struct s_varmlx
 	int			wwidth;
 	int			wheight;
 	void		*img;
+	char		*imgdata;
+	int			bpp;
+	int			size_line;
+	int			endian;
 	int			icolor;
 	int			iwidth;
 	int			iheight;

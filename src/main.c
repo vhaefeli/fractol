@@ -6,19 +6,19 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:22:47 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/06 17:01:36 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:53:01 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int error(int type)
+static int ft_error(int type)
 {
-	if (type = 1)
+	if (type == 1)
 		ft_printf("not enough argument\n");
-	else if (type = 2)
+	else if (type == 2)
 		ft_printf("wrong argument\n");
-	else if (type = 3)
+	else if (type == 3)
 		ft_printf("too much arguments\n");
 	ft_printf("the correct way is to put ''./fractol fractal_name''\n");
 	ft_printf("for the fractal_name choose between:\n");
@@ -44,38 +44,61 @@ static int	check(char **argv, t_varmlx *v)
 	return (0);
 }
 
-static void		assign(t_varmlx *v)
+void		assign(t_varmlx *v)
 {
 	v->wwidth = WIN_W;
 	v->wheight = WIN_H;
 	v->bcolor = 0x3c3c3c;
 	v->iwidth = IMG_W;
 	v->iheight = IMG_H;
-	v->ipos->x = 0;
-	v->ipos->y = 0;
+	v->ipos.x = 0.;
+	v->ipos.y = 0.;
 	v->icolor = 0x000000;
 	v->tcolor = 0xeeeeee;
-	v->tpos->x = IMG_W + 8;
-	v->tpos->y = 8;
-	v->pxlpos->x = 0;
-	v->pxlpos->y = 0;
-	v->mi = 0.285;
-	v->mr = 0.013;
-	v->scale = 3 / IMG_W;
+	v->tpos.x = IMG_W + 8.;
+	v->tpos.y = 8.;
+	v->pxlpos.x = 0.;
+	v->pxlpos.y = 0.;
+	v->scale = 4. / WIN_W;
+	v->itmax = 30;
+	v->cy = IMG_H / 2;
 	if (v->fractal == 1)
-		v->ci = IMG_W / 3 * 2;
-	else
-		v->ci = IMG_W / 2;
-	v->cr = IMG_H / 2;
+		v->cx = IMG_W / 3 * 2;
+	if (v->fractal == 2)
+	{
+		v->cx = IMG_W / 2;
+		v->mr = 0.285;
+		v->mi = 0.013;
+	}
+	if (v->fractal == 3)
+	{
+		v->itmax = 20;
+		v->scale = 0.5 / WIN_W;
+		v->cx = IMG_W * 4;
+		v->cy = IMG_H / 3 * 2;
+		v->mr = 0.312;
+		v->mi = 0.469;
+	}
+	if (v->fractal == 4)
+	{
+		v->scale = 20. / WIN_W;
+		v->cx = IMG_W / 2;
+		v->mr = 0.312;
+		v->mi = 0.469;
+	}
+	
+		
+
 	v->i = 0;
 	v->mouseonoff = 0;
+	
 }
 
 static void		init_win(t_varmlx *v)
 {
-	assign(v, w);
+	assign(v);
 	v->mlx = mlx_init();
-	v->win = mlx_new_window(v->mlx, -1, -1, WIN_W, WIN_H, "Fract-ol");
+	v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "Fract-ol");
 	mlx_expose_hook(v->win, expose_hook, v);
 	mlx_hook(v->win, 6, 64, motion_hook, v);
 	mlx_hook(v->win, 17, 0, close_hook, v);
@@ -92,11 +115,11 @@ int	main (int argc, char **argv)
 	
 	v = (t_varmlx *)malloc(sizeof(t_varmlx));
 	if (argc < 2)
-		return (error(0));
+		return (ft_error(0));
 	else if (argc > 2)
-		return (error(3));
+		return (ft_error(3));
 	else if (check(argv, v) > 0)
-		return (error(2));
+		return (ft_error(2));
 	else
 		init_win(v);
 	return (0);

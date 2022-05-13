@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vhaefeli <marvin@42lausanne.ch>            +#+  +:+       +#+         #
+#    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 13:42:13 by vhaefeli          #+#    #+#              #
-#    Updated: 2022/04/25 13:57:46 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/05/11 16:14:52 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = mlx_tools.a
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =	colorshade.c/
+SRCS =	
 		
 		
 OBJS = $(SRCS:.c=.o)
