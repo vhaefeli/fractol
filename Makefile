@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 13:10:08 by vhaefeli          #+#    #+#              #
-#    Updated: 2022/05/11 16:20:01 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/05/16 15:48:37 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ LIBS			= $(LIBFT_DIR)/libft.a $(MINILIBX_DIR)/libmlx.a
 _SRCS 			= draw.c\
 					fractal.c\
 					hook.c\
+					mouse_hook.c\
 					main.c
 
 OBJS 			= $(patsubst %.c, $(OBJS_DIR)/%.o, $(_SRCS))
@@ -61,7 +62,7 @@ $(OBJS_DIR):
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	$(CC) -c $(CFLAGS) -o $@ $^ $(INCLUDES)
 
-$(TARGET): $(MINILIBX_DIR)/libmlx.a $(LIBFT_DIR)/libft.a $(OBJS) 
+$(TARGET): $(MINILIBX_DIR)/libmlx.a $(LIBFT_DIR)/libft.a $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INCLUDES) -L$(MINILIBX_DIR) \
 		-lmlx $(EXT_LIBS) $(LIBFT_DIR)/libft.a
 

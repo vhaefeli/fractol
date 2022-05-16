@@ -6,13 +6,13 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:22:47 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/12 16:53:01 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:54:31 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int ft_error(int type)
+static int	ft_error(int type)
 {
 	if (type == 1)
 		ft_printf("not enough argument\n");
@@ -28,7 +28,7 @@ static int ft_error(int type)
 
 static int	check(char **argv, t_varmlx *v)
 {
-	char *str;
+	char	*str;
 
 	str = ft_strtolower(argv[1]);
 	if (ft_strcmp(str, "mandelbrot") == 0)
@@ -44,7 +44,7 @@ static int	check(char **argv, t_varmlx *v)
 	return (0);
 }
 
-void		assign(t_varmlx *v)
+void	assign(t_varmlx *v)
 {
 	v->wwidth = WIN_W;
 	v->wheight = WIN_H;
@@ -59,8 +59,14 @@ void		assign(t_varmlx *v)
 	v->tpos.y = 8.;
 	v->pxlpos.x = 0.;
 	v->pxlpos.y = 0.;
-	v->scale = 4. / WIN_W;
+	v->scale = 4.;
 	v->itmax = 30;
+	v->mouseonoff = 0;
+	assign_fractal(v);
+}
+
+void	assign_fractal(t_varmlx *v)
+{
 	v->cy = IMG_H / 2;
 	if (v->fractal == 1)
 		v->cx = IMG_W / 3 * 2;
@@ -73,7 +79,7 @@ void		assign(t_varmlx *v)
 	if (v->fractal == 3)
 	{
 		v->itmax = 20;
-		v->scale = 0.5 / WIN_W;
+		v->scale = 0.5;
 		v->cx = IMG_W * 4;
 		v->cy = IMG_H / 3 * 2;
 		v->mr = 0.312;
@@ -81,38 +87,17 @@ void		assign(t_varmlx *v)
 	}
 	if (v->fractal == 4)
 	{
-		v->scale = 20. / WIN_W;
+		v->scale = 20.;
 		v->cx = IMG_W / 2;
-		v->mr = 0.312;
-		v->mi = 0.469;
+		v->mr = 0.0566;
+		v->mi = 0.6226;
 	}
-	
-		
-
-	v->i = 0;
-	v->mouseonoff = 0;
-	
 }
 
-static void		init_win(t_varmlx *v)
-{
-	assign(v);
-	v->mlx = mlx_init();
-	v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "Fract-ol");
-	mlx_expose_hook(v->win, expose_hook, v);
-	mlx_hook(v->win, 6, 64, motion_hook, v);
-	mlx_hook(v->win, 17, 0, close_hook, v);
-	mlx_hook(v->win, 2, 0, key_hook, v);
-	mlx_mouse_hook(v->win, mouse_hook, v);
-	mlx_do_key_autorepeaton(v->mlx);
-	mlx_loop(v->mlx);
-	exit(0);
-}
-
-int	main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_varmlx	*v;
-	
+
 	v = (t_varmlx *)malloc(sizeof(t_varmlx));
 	if (argc < 2)
 		return (ft_error(0));
