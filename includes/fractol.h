@@ -18,11 +18,11 @@
 # include "mlx.h"
 # include <math.h>
 
-# define WIN_W 2320
-# define WIN_H 1280
+# define WIN_W 1320
+# define WIN_H 680
 
-# define IMG_W 2120
-# define IMG_H 1280
+# define IMG_W 1120
+# define IMG_H 680
 
 # define MIN_J -3.20
 # define MAX_J 3.200
@@ -66,6 +66,7 @@ int		put_pixel(t_varmlx *v);
 void	draw_fractal(t_varmlx *v);
 char	*fractal_name(int fractal);
 void	user_interface_texts(t_varmlx *v);
+void	user_interface_texts2(t_varmlx *v);
 
 void	fractal_mandelbrot(t_varmlx	*v);
 void	fractal_julia(t_varmlx *v);

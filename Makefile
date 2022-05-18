@@ -20,7 +20,7 @@ else
 	EXT_LIBS += -framework OpenGL -framework AppKit -lz
 endif
 
-CFLAGS 			= -Wall -Wextra -Werror #-g -fsanitize=address -fno-omit-frame-pointer
+CFLAGS 			= -Wall -Wextra -Werror -g -fsanitize=address -fno-omit-frame-pointer
 TARGET 			= fractol
 SRCS_DIR 		= ./src
 OBJS_DIR 		= ./obj
