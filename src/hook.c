@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:22:17 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/23 12:16:40 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:28:06 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	init_win(t_varmlx *v)
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "Fract-ol");
 	mlx_expose_hook(v->win, expose_hook, v);
-	mlx_hook(v->win, 6, 64, motion_hook, v);
-	mlx_hook(v->win, 17, 0, close_hook, v);
-	mlx_hook(v->win, 2, 0, key_hook, v);
-	mlx_hook(v->win, 4, 0, mouse_hook, v);
+	mlx_hook(v->win, EVENT_ON_MOUSEMOVE, 64, motion_hook, v);
+	mlx_hook(v->win, EVENT_ON_DESTROY, 0, close_hook, v);
+	mlx_hook(v->win, EVENT_ON_KEYDOWN, 0, key_hook, v);
+	mlx_hook(v->win, EVENT_ON_MOUSEDOWN, 0, mouse_hook, v);
 	mlx_do_key_autorepeaton(v->mlx);
 	mlx_loop(v->mlx);
 	exit(0);
@@ -40,9 +40,9 @@ int	expose_hook(t_varmlx *v)
 static void	key_control(t_varmlx *v, int keycode)
 {
 	if (keycode == KEY_UP)
-		v->itmax += 5;
+		v->itmax += 10;
 	else if (keycode == KEY_DOWN)
-		v->itmax -= 5;
+		v->itmax -= 10;
 	else if (keycode == KEY_RIGHT)
 	{
 		if (v->fractal < 4)

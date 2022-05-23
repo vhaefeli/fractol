@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:22:47 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/16 15:54:31 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:01:21 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	assign(t_varmlx *v)
 	v->scale = 4.;
 	v->itmax = 30;
 	v->mouseonoff = 0;
+	v->i = 0;
 	assign_fractal(v);
 }
 

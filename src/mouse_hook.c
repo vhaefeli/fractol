@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:46:30 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/16 15:49:40 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:33:11 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	mouse_hook(int button, int x, int y, t_varmlx *v)
 	{
 		if (button == MOUSE_SCROLL_UP)
 		{
-			v->itmax = v->itmax - 2;
+			v->itmax = v->itmax;
 			zoom_focused(v, 1 / 1.2);
 		}
 		else if (button == MOUSE_SCROLL_DOWN)

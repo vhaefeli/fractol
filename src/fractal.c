@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:21:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/16 15:43:01 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:28:49 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_shade_color(t_varmlx *v, int i)
 {
 	if (i == v->itmax)
-		v->pxlcolor = 0xFF0000FF;
+		v->pxlcolor = 0xFF001000;
 	else
-		v->pxlcolor = 0xFF00FFFF - 0x000100 * i - 0x10 * i;
+		v->pxlcolor = 0xFF00FFFF - 0x0001000 * i;
 }
 
 void	fractal_mandelbrot(t_varmlx	*v)

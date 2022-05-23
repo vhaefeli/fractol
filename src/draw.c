@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:21:41 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/16 15:34:02 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:32:33 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	put_pixel(t_varmlx *v)
 {
 	int		i;
-//	int		x;
-//	int		y;
+	int		x;
+	int		y;
 	char	*rgb;
 
-//	x = v->pxlpos.x;
-//	y = v->pxlpos.y;
+	x = v->pxlpos.x;
+	y = v->pxlpos.y;
 	i = ((int)v->pxlpos.x * (v->bpp / 8)) + ((int)v->pxlpos.y * v->size_line);
 	rgb = (char *)&v->pxlcolor;
 	v->imgdata[i] = rgb[0];
@@ -67,14 +67,14 @@ void	user_interface_texts(t_varmlx *v)
 {
 	char	**texts;
 
-	texts = malloc((sizeof(char*)) * 5);
+	texts = malloc((sizeof(char *)) * 5);
 	texts[0] = ft_itoa((int)(v->mr * 10000));
 	texts[1] = ft_itoa((int)(v->mi * 10000));
 	texts[2] = ft_itoa(v->itmax);
 	texts[3] = ft_itoa((int)(4 / v->scale));
 	texts[4] = ft_itoa(v->mouseonoff);
 	mlx_string_put(v->mlx, v->win, 2128, 108, v->tcolor, texts[0]);
-	mlx_string_put(v->mlx, v->win, 2128, 148, v->tcolor,texts[1]);
+	mlx_string_put(v->mlx, v->win, 2128, 148, v->tcolor, texts[1]);
 	mlx_string_put(v->mlx, v->win, 2128, 188, v->tcolor, texts[2]);
 	mlx_string_put(v->mlx, v->win, 2128, 248, v->tcolor, texts[3]);
 	mlx_string_put(v->mlx, v->win, 2198, 268, v->tcolor, texts[4]);
