@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 13:10:08 by vhaefeli          #+#    #+#              #
-#    Updated: 2022/05/16 15:48:37 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/05/18 10:10:30 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MINILIBX_DIR) clean
 	rm -f $(OBJS) $(OBJS_BONUS)
-	rm -d $(OBJS_DIR)
+	rm -df $(OBJS_DIR)
 
 
 fclean: clean

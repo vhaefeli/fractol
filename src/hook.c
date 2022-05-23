@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:22:17 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/05/16 15:51:50 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:16:40 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	key_control(t_varmlx *v, int keycode)
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		if (v->fractal > 0)
+		if (v->fractal > 1)
 			v->fractal--;
 		else
 			v->fractal = 4;
